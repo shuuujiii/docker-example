@@ -1,12 +1,11 @@
 const express = require("express");
 const app = express();
 
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 3000;
 
 app.get("/", (req, res) => {
-    console.log('test')
     res.send(`
-     <h1>aHello From Node Running Inside Docker</h1>
+     <h1>rebuildaa From Node Running Inside Docker</h1>
 `);
 });
 

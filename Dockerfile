@@ -1,9 +1,13 @@
-FROM node:16.3.0
+FROM node:15
+WORKDIR /app
+COPY package.json .
 
-WORKDIR /home/app
-USER node
+ARG NODE_ENV
+RUN if [ "$NODE_ENV" = "development" ]; \
+    then yarn install; \
+    else yarn install --production; \
+    fi
+COPY . ./
 ENV PORT 3000
-
-EXPOSE 3000
-
-ENTRYPOINT /bin/sh
+EXPOSE $PORT
+CMD ["yarn","dev"]
