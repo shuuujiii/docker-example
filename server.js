@@ -1,6 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose")
 const app = express();
+const cors = require('cors')
 const postRouter = require('./routes/postRoutes')
 const authRouter = require('./routes/authRoutes')
 const session = require('express-session')
@@ -37,6 +38,8 @@ connectWithRetry()
 //     })
 //     .then(() => { console.log('successfully connected to DB') })
 //     .catch(err => { console.log(err) })
+app.use(cors())
+app.enable('trust proxy')
 app.use(session({
     store: new RedisStore({ client: redisClient }),
     secret: SESSION_SECRET,
@@ -51,7 +54,8 @@ app.use(session({
 const PORT = process.env.PORT || 3000;
 
 app.use(express.json())
-app.get("/", (req, res) => {
+app.get("/api", (req, res) => {
+    console.log('hello')
     res.send(`
      <h1>rebuildaa From Node Running Inside Docker</h1>
 `);
