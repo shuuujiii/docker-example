@@ -10,4 +10,10 @@ services:
             - /app/node_modules
         environment:
             - NODE_ENV=development
+            - MONGO_USER=nabeshi
+            - MONGO_PASSWORD=mypassword
         command: yarn dev
+    mongo:
+        environment:
+            - MONGO_INITDB_ROOT_USERNAME=nabeshi
+            - MONGO_INITDB_ROOT_PASSWORD=mypassword
