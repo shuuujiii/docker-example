@@ -7,6 +7,7 @@ exports.signUp = async (req, res, next) => {
     const hashedpassword = await bcrypt.hash(password, 12)
     try {
         const newUser = await User.create({ username: username, password: hashedpassword })
+        req.session.user = newUser
         res.status(200).json({
             status: 'success',
             data: {
@@ -38,6 +39,7 @@ exports.signIn = async (req, res, next) => {
                 message: 'incorrect username or password',
             })
         }
+        req.session.user = user
         res.status(200).json({
             status: 'success',
             data: {
